@@ -25,14 +25,21 @@
     transition: .2s;
 }
 .icons{
-    display: flex;
-    height: 100px;
-    align-items: center;
-    justify-content: space-around;
-    width: 100px;
+    display: grid;
+    grid-template-columns: 24px 24px; 
+    grid-template-rows: 24px;
+    grid-column-gap: 25px;
+
 }
 .icon{
     border-radius: 50px;
+    width: 30px;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 30px;
+
 }
 .icon:hover{
     background-color: #00000038;

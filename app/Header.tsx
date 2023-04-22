@@ -14,8 +14,8 @@ function Header() {
             <Link href="/sale" className={styles.link}>Sale</Link>
         </div>
         <div className={styles.icons}>
-            <Link href="/sale" className={styles.icon}><Image src="/icons/favorite.svg" height={30} width={30} alt={''} /></Link>
-            <Link href="/sale" className={styles.icon}><Image src="/icons/shop.svg" height={30} width={30} alt={''} /></Link>
+            <Link href="/sale" className={styles.icon}><Image src="/icons/favorite.svg" height={24} width={24} alt={''} /></Link>
+            <Link href="/sale" className={styles.icon}><Image src="/icons/bag.svg" height={24} width={24} alt={''} /></Link>
         </div>
     </nav>
   )
