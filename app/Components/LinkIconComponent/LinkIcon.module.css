@@ -1,0 +1,9 @@
+.icon{
+}
+.icon:hover{
+    background: white;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    transition: .2s;
+    object-fit: contain;
+}

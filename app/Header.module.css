@@ -1,0 +1,39 @@
+.header{
+    background-color: white;
+    padding: 0 40px;
+    width: 100%;
+    position:sticky;
+    top:0;
+    display: flex;
+    height: 100px;
+    justify-content:space-between;
+    align-items: center;
+    z-index: 1;
+}
+.link{
+    color: black;
+    font-size: 22px;
+    border-bottom: 3px solid white;
+    font-weight: 500;
+    margin-left: 20px;  
+    padding-bottom: 5px;  
+    transition: .2s;
+
+}
+.link:hover{
+    border-bottom: 3px solid black;
+    transition: .2s;
+}
+.icons{
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+}
+.icon{
+    border-radius: 50px;
+}
+.icon:hover{
+    background-color: #00000038;
+}

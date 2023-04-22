@@ -1,0 +1,39 @@
+.product{
+    cursor: pointer;
+}
+.imageContainer{
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    height: 600px;
+  
+}
+.productData{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.description{
+    margin-top: 5px;
+    color: rgba(119, 117, 117, 0.856);
+}
+@media (max-width: 1700px){
+    .imageContainer {
+      width: 500px;
+      height: 500px;
+    }
+  }
+  @media (max-width: 1500px){
+    .imageContainer {
+      width: 400px;
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 1300px){
+    .imageContainer {
+      width: 300px;
+      height: 300px;
+    }
+  }
+  

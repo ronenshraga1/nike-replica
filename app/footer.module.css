@@ -1,0 +1,59 @@
+.footer{
+    background-color: black;
+    color: white;
+    height: 300px;
+    width: 100%;
+
+}
+.upperFooter{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.iconSection{
+    display: flex;
+    padding: 14px 0;
+    width: 200px;
+    justify-content: space-between;
+}
+.headline{
+    font-size: 14px;
+    line-height: 2.5;
+    font-family: Nike-TG;
+
+}
+.regular{
+    color: #7e7e7e;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 2.33333;
+}
+.regular:hover{
+    color: white;
+    transition: .2s;
+}
+.linkSection{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.lowerFooter{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+.credits{
+    display: flex;
+    justify-content: space-between;
+    width: 270px;
+}
+.links{
+    display: flex;
+    width: 660px;
+    justify-content:space-around;
+    
+}
+.country{
+    line-height: 2.2;
+    font-size: 12px;
+}
