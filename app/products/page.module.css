@@ -1,0 +1,12 @@
+.pageContainer{
+    display: flex;
+}
+.filters{
+    width: 20%;
+}
+.products{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}
