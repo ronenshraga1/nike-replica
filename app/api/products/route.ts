@@ -10,7 +10,7 @@ export async function GET(request: Request,response:NextResponse) {
     return NextResponse.json({ products })
   }catch(ex){
     console.log(ex);
-    return NextResponse.json({ })
+    return NextResponse.json({ex},{status:500})
 
   }
 

@@ -9,6 +9,7 @@ const getProducts = async() =>{
   const response =await fetch('http://localhost:3000/api/products?gender=male');
   const products = await response.json();
   console.log(products);
+  localStorage.setItem('list',products.products);
   return products.products;
   } catch(ex){
     throw new Error('FAILED');
@@ -30,7 +31,7 @@ function page() {
       </div>
       <div className={styles.products}>
         {products.map((item)=>(
-          <Product id={item._id} url={item.mainImageUrl} productUrl='/' description={item.description} name={item.name} price={item.price}/>
+          <Product id={item._id} url={item.mainImageUrl} productUrl='/' description={item.description} name={item.name} price={item.price} isMainPage={false}/>
         ))}
       </div>
 

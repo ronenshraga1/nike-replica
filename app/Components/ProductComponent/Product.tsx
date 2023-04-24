@@ -8,14 +8,15 @@ interface PageProps{
         description:string;
         url:string;
         price:number;
-        productUrl:string
+        productUrl:string;
+        isMainPage:boolean;
 };
 
-function Product({url,id,description,price,name,productUrl ="/"}:PageProps) {
+function Product({url,id,description,price,name,productUrl ="/",isMainPage}:PageProps) {
   return (
     <div className={styles.product}>
       <Link href={productUrl}>
-        <div className={styles.imageContainer}>
+        <div className={isMainPage ? styles.imageContainer:styles.imageProduct}>
             <Image src={url} alt='' fill/>
         </div>
         <section className={styles.productData}>
