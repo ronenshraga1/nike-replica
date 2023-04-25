@@ -10,9 +10,10 @@ interface PageProps{
         price:number;
         productUrl:string;
         isMainPage:boolean;
+        isNew?:boolean;
 };
 
-function Product({url,id,description,price,name,productUrl ="/",isMainPage}:PageProps) {
+function Product({url,id,description,price,name,productUrl ="/",isMainPage,isNew}:PageProps) {
   return (
     <div className={styles.product}>
       <Link href={productUrl}>
@@ -21,6 +22,7 @@ function Product({url,id,description,price,name,productUrl ="/",isMainPage}:Page
         </div>
         <section className={styles.productData}>
             <div>
+                {isNew ? <p className={styles.special}>Just In</p>:undefined}
                 <p>{name}</p>
                 <p className={styles.description}>{description}</p>
             </div>

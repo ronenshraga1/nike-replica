@@ -8,4 +8,6 @@ export interface Item{
     name:string;
     mainImageUrl:string;
     price:number;
+    createDate:Date;
+    isNew?:boolean;
 };

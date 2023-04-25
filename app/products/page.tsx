@@ -31,7 +31,7 @@ function page() {
       </div>
       <div className={styles.products}>
         {products.map((item)=>(
-          <Product id={item._id} url={item.mainImageUrl} productUrl='/' description={item.description} name={item.name} price={item.price} isMainPage={false}/>
+          <Product id={item._id} url={item.mainImageUrl} productUrl='/' description={item.description} name={item.name} price={item.price} isNew={item.isNew} isMainPage={false}/>
         ))}
       </div>
 

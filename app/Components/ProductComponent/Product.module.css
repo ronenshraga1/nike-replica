@@ -18,6 +18,11 @@
     margin-top: 5px;
     color: rgba(119, 117, 117, 0.856);
 }
+.special{
+  color: #9E3500;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
 .imageProduct{
   position: relative;
   overflow: hidden;

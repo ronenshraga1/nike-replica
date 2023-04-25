@@ -14,8 +14,10 @@ const productSchema = new Schema({
         type:Array<StockItem>,
         required:true,
     },
-    itemID:Number
+    itemID:Number,
+    createDate:Date,
+    isNew:Boolean,
 
-},)
+})
 const Product = models.Product ||model('items',productSchema);
 export default Product;
