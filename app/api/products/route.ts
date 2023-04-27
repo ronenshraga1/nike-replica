@@ -7,7 +7,8 @@ export async function GET(request: Request,response:NextResponse) {
     connectMongo();
     const { searchParams } = new URL(request.url);
     const gender = searchParams.get('gender');
-    const products = await Product.find({gender},{name:1,description:1,mainImageUrl:1,price:1,createDate:1});
+    const startIndex =  parseInt(searchParams.get('startIndex') || '0');
+    const products = await Product.find({gender},{name:1,description:1,mainImageUrl:1,price:1,createDate:1}).limit(10).skip(startIndex);
     let newproducts = products.map((item)=>item);
     newproducts.forEach(function(item){
       if(item.createDate !== undefined){
