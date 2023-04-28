@@ -4,6 +4,7 @@ import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react
 import styles from './page.module.css';
 import Product from '../Components/ProductComponent/Product';
 import { Item } from '../../typings';
+import Loader from '../Components/LoaderComponent/LoaderComponent';
 const getProducts = async(startIndex:number) =>{
   try{
   const response =await fetch(`http://localhost:3000/api/products?gender=male&startIndex=${startIndex}`);
@@ -37,18 +38,21 @@ function page() {
      setLoading(false);
     })()
   },[]);
+  const updateLoading = useCallback((value:boolean)=>{
+    setLoading(value);
+  },[])
   const handleNavigation = useCallback(async(e: any)=>{
-    if(window.scrollY !==y){
+    if(window.scrollY !==y && window.scrollY+60 !==y  && y+160 !== window.scrollY){
       console.log(window.scrollY);
       console.log(y);
-      const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight -200;
+      const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
       console.log(isloading);
       if(bottom && !isloading){
         console.log('call');
-        setLoading(true);
+        updateLoading(true);
         console.log(products);
         const newproducts : Item[] = await getProducts(products.length);
-        setLoading(false);
+        updateLoading(false);
         setProducts([...products,...newproducts]);
       }
     }
@@ -62,21 +66,22 @@ function page() {
     window.addEventListener("scroll",handleNavigation);
   
     return () => { // return a cleanup function to unregister our function since it's going to run multiple times
-      console.log('another');
       window.removeEventListener("scroll",handleNavigation);
     };
   }, [handleNavigation]);
   return (
+    <div>
     <section className={styles.pageContainer}>
       <div className={styles.filters}>
         <h3>dsadad</h3>
       </div>
       <div className={styles.products}>
         <LoadItems products={products} />
-
       </div>
-
     </section>
+    {isloading? <Loader /> : undefined}
+
+    </div>
   )
 }
 

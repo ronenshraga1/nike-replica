@@ -18,6 +18,6 @@ const productSchema = new Schema({
     createDate:Date,
     isNew:Boolean,
 
-})
+},{supressReservedKeysWarning:true})
 const Product = models.Product ||model('items',productSchema);
 export default Product;
