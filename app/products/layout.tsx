@@ -6,7 +6,7 @@ export default function RootLayout({
     children: React.ReactNode
   }) {    
     return (
-        <main style={{overflowY:"hidden"}}>
+        <main>
           {children}
         </main>
     )

@@ -4,6 +4,9 @@
 }
 .filters{
     width: 20%;
+    position: sticky;
+    max-height: 500px;
+    top: 100px;
     background-color: red;
 }
 .products{
