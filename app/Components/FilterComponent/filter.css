@@ -3,11 +3,43 @@
     font-size: 18px;
     justify-content: space-evenly;
     width: 80px;
-    line-height: 1;
 }
+.label{
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+p{
+    font-size: 17px;
+    line-height: 1;
+    margin: 10px 0;
+}
+.selectbutton{
+    height: 36px;
+    width: 60px;
+    cursor: pointer;
+    font-size: 17px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    margin: 0 6px 6px 4px;
+}
+.isSelected{
+    box-shadow: inset 0px 0px 0 1px #000;
+}
+.listItem{
+    cursor: pointer;
+    width: fit-content;
+}
+.selected{
+    border-bottom: 2px solid black;
+    font-weight: 600;
+}
+
 .checkbox:before {
     content: "";
     display: block;
+    cursor: pointer;
     position: absolute;
     width: 16px;
     height: 16px;
@@ -20,6 +52,7 @@
 .checkboxChecked:before {
     content: "";
     display: block;
+    cursor: pointer;
     position: absolute;
     width: 16px;
     height: 16px;
@@ -36,6 +69,7 @@
     display: block;
     width: 5px;
     height: 10px;
+    cursor: pointer;
     border: solid white;
     border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
