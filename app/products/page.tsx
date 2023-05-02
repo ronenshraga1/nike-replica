@@ -32,6 +32,7 @@ function page() {
   const [products,setProducts] = useState<Item[]>([]);
   const [selectedCategory,setCategory] = useState<string>('');
   const [selectedPrice,setPrice] = useState<string>('');
+  const [selectedSize,setSize] = useState<string>('');
   const [y, setY] = useState(0);
   const [isloading,setLoading] = useState<boolean>(true);
   useEffect(()=>{
@@ -63,7 +64,13 @@ function page() {
       setPrice('');
     }
   },[selectedPrice])
-
+  const updateSize = useCallback((id:string)=>{
+    if(id !== selectedSize){
+      setSize(id);
+    } else{
+      setSize('');
+    }
+  },[selectedSize])
   const handleNavigation = useCallback(async(e: any)=>{
     if(window.scrollY !==y && window.scrollY+60 !==y  && y+160 !== window.scrollY){
       const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
@@ -93,7 +100,7 @@ function page() {
         <Filter id='1' name='pinhas' isCheckBox query='link' currentFetchUrl='' isSelectedItem={selectedPrice} setSelected={updatePrice}/>
         <Filter id='2'name='pinhas' query='link' currentFetchUrl=''isSelectedItem={selectedCategory} setSelected={updateCategory} />
         <Filter id='3' name='pinhas' query='link' currentFetchUrl=''isSelectedItem={selectedCategory} setSelected={updateCategory}/>
-        <Filter id='3' name='35' query='link' isChooseItem currentFetchUrl=''isSelectedItem={selectedCategory} setSelected={updateCategory}/>
+        <Filter id='4' name='35' query='link' isChooseItem currentFetchUrl=''isSelectedItem={selectedSize} setSelected={updateSize}/>
       </div>
       <div className={styles.products}>
         <LoadItems products={products} />
