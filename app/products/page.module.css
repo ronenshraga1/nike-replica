@@ -5,7 +5,8 @@
 .filters{
     width: 20%;
     position: sticky;
-    max-height: 500px;
+    max-height: 900px;
+    overflow-y: auto;
     top: 100px;
 }
 .filtersContainer{

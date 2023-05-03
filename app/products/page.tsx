@@ -3,6 +3,7 @@
 import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 import sizes from '../Components/Common/sizes.json' assert {type:"json"};
+import categories from '../Components/Common/categories.json' assert {type:"json"};
 import {Category, Price} from '../../typings';
 import Product from '../Components/ProductComponent/Product';
 import { Item } from '../../typings';
@@ -28,9 +29,7 @@ const prices :Price[] = [
 {id:'3',price:'₪ 520 - ₪ 710',name:''},
 {id:'4',price:`₪ 710`,name:'Over '}];
 function page() {
-  console.log(sizes.sizes);
   const [products,setProducts] = useState<Item[]>([]);
-  const[categories,setCategories] = useState<Category[]>([]);
   const [selectedCategory,setCategory] = useState<string>('');
   const [selectedPrice,setPrice] = useState<string>('');
   const [selectedSize,setSize] = useState<string>('');
@@ -46,17 +45,9 @@ function page() {
       throw new Error('FAILED');
     }
   }
-  const getCategories = async()=>{
-     fetch(`http://localhost:3000/api/categories`,{next:{revalidate:600}}).
-    then(data=>data.json()).then(data=> setCategories(data.categories)).catch(ex => {
-      console.log(ex);
-      setCategories([])
-    });
-  }
 
   useEffect(()=>{
     (async()=>{
-     getCategories();
      const products : Item[] = await getProducts(0);
      setProducts(products);
      setLoading(false);
@@ -119,20 +110,20 @@ function page() {
       <div className={styles.filters}>
         <div className={styles.filtersContainer}>
         <div className={styles.categories}>
-        {categories.map((category)=>(
-            <Filter id={category.name} name={category.name} isSelectedItem={selectedCategory} setSelected={updateCategory} />
+        {categories.categories.map((category)=>(
+            <Filter key={category.name} id={category.name} name={category.name} isSelectedItem={selectedCategory} setSelected={updateCategory} />
           ))}
         </div>
         <p>Shop By Price</p>
         <div className={styles.prices}>
           {prices.map((price)=>(
-            <Filter id={price.id} name={price.name + price.price} isCheckBox isSelectedItem={selectedPrice} setSelected={updatePrice} />
+            <Filter key={price.id} id={price.id} name={price.name + price.price} isCheckBox isSelectedItem={selectedPrice} setSelected={updatePrice} />
           ))}
         </div>
         <p>Size</p>
          <div className={styles.sizes}>
             {sizes.sizes.map((size)=>(
-              <Filter id={size} name={size} isChooseItem isSelectedItem={selectedSize} setSelected={updateSize} />
+              <Filter key={size} id={size} name={size} isChooseItem isSelectedItem={selectedSize} setSelected={updateSize} />
             ))}
           </div>
 
