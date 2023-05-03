@@ -5,9 +5,19 @@
 .filters{
     width: 20%;
     position: sticky;
-    max-height: 900px;
+    max-height: 980px;
     overflow-y: auto;
     top: 100px;
+}
+.filters::-webkit-scrollbar{
+    width: 10px;
+}
+.filters::-webkit-scrollbar-track{
+    background: transparent;
+}
+.filters::-webkit-scrollbar-thumb{
+    background: #7f7f7f;
+    border-radius: 10px;
 }
 .filtersContainer{
     margin-left: 15%;
