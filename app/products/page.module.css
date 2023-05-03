@@ -8,6 +8,30 @@
     max-height: 500px;
     top: 100px;
 }
+.filtersContainer{
+    margin-left: 15%;
+}
+.categories{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+    width: 90%;
+    border-bottom: 1px solid lightgray;
+}
+.prices{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 140px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+    width: 90%;
+}
+.sizes{
+    width: 90%;
+    display: flex;
+    flex-flow: row wrap;
+}
 .products{
     max-width: 80%;
     display: grid;

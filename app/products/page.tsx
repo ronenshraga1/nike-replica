@@ -1,20 +1,14 @@
 "use client";
 
-import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
+import sizes from '../Components/Common/sizes.json' assert {type:"json"};
+import {Category, Price} from '../../typings';
 import Product from '../Components/ProductComponent/Product';
 import { Item } from '../../typings';
 import Loader from '../Components/LoaderComponent/LoaderComponent';
 import Filter from '../Components/FilterComponent/filter';
-const getProducts = async(startIndex:number) =>{
-  try{
-  const response =await fetch(`http://localhost:3000/api/products?gender=male&startIndex=${startIndex}`);
-  const productsJson = await response.json();
-  return productsJson.products;
-  } catch(ex){
-    throw new Error('FAILED');
-  }
-}
+import { type } from 'os';
 
 type items ={
   products:Item[]
@@ -28,15 +22,41 @@ function LoadItems({products}:items){
     </>
   )
 }
+const prices :Price[] = [
+  {id:'1',price:'₪ 260',name:'Under '},
+{id:'2',price:'₪ 260 - ₪ 520',name:''},
+{id:'3',price:'₪ 520 - ₪ 710',name:''},
+{id:'4',price:`₪ 710`,name:'Over '}];
 function page() {
+  console.log(sizes.sizes);
   const [products,setProducts] = useState<Item[]>([]);
+  const[categories,setCategories] = useState<Category[]>([]);
   const [selectedCategory,setCategory] = useState<string>('');
   const [selectedPrice,setPrice] = useState<string>('');
   const [selectedSize,setSize] = useState<string>('');
   const [y, setY] = useState(0);
   const [isloading,setLoading] = useState<boolean>(true);
+
+  const getProducts = async(startIndex:number) =>{
+    try{
+    const response =await fetch(`http://localhost:3000/api/products?gender=male&startIndex=${startIndex}`);
+    const productsJson = await response.json();
+    return productsJson.products;
+    } catch(ex){
+      throw new Error('FAILED');
+    }
+  }
+  const getCategories = async()=>{
+     fetch(`http://localhost:3000/api/categories`,{next:{revalidate:600}}).
+    then(data=>data.json()).then(data=> setCategories(data.categories)).catch(ex => {
+      console.log(ex);
+      setCategories([])
+    });
+  }
+
   useEffect(()=>{
     (async()=>{
+     getCategories();
      const products : Item[] = await getProducts(0);
      setProducts(products);
      setLoading(false);
@@ -97,10 +117,26 @@ function page() {
     <div>
     <section className={styles.pageContainer}>
       <div className={styles.filters}>
-        <Filter id='1' name='pinhas' isCheckBox query='link' currentFetchUrl='' isSelectedItem={selectedPrice} setSelected={updatePrice}/>
-        <Filter id='2'name='pinhas' query='link' currentFetchUrl=''isSelectedItem={selectedCategory} setSelected={updateCategory} />
-        <Filter id='3' name='pinhas' query='link' currentFetchUrl=''isSelectedItem={selectedCategory} setSelected={updateCategory}/>
-        <Filter id='4' name='35' query='link' isChooseItem currentFetchUrl=''isSelectedItem={selectedSize} setSelected={updateSize}/>
+        <div className={styles.filtersContainer}>
+        <div className={styles.categories}>
+        {categories.map((category)=>(
+            <Filter id={category.name} name={category.name} isSelectedItem={selectedCategory} setSelected={updateCategory} />
+          ))}
+        </div>
+        <p>Shop By Price</p>
+        <div className={styles.prices}>
+          {prices.map((price)=>(
+            <Filter id={price.id} name={price.name + price.price} isCheckBox isSelectedItem={selectedPrice} setSelected={updatePrice} />
+          ))}
+        </div>
+        <p>Size</p>
+         <div className={styles.sizes}>
+            {sizes.sizes.map((size)=>(
+              <Filter id={size} name={size} isChooseItem isSelectedItem={selectedSize} setSelected={updateSize} />
+            ))}
+          </div>
+
+        </div>
       </div>
       <div className={styles.products}>
         <LoadItems products={products} />
