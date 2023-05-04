@@ -17,6 +17,7 @@ const productSchema = new Schema({
     itemID:Number,
     createDate:Date,
     isNew:Boolean,
+    category:String
 
 },{supressReservedKeysWarning:true})
 const Product = models.Product ||model('items',productSchema);

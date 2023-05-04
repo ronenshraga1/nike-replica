@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 import sizes from '../Components/Common/sizes.json' assert {type:"json"};
 import categories from '../Components/Common/categories.json' assert {type:"json"};
@@ -29,6 +30,7 @@ const prices :Price[] = [
 {id:'3',price:'₪ 520 - ₪ 710',name:''},
 {id:'4',price:`₪ 710`,name:'Over '}];
 function page() {
+  const searchParams = useSearchParams();
   const [products,setProducts] = useState<Item[]>([]);
   const [selectedCategory,setCategory] = useState<string>('');
   const [selectedPrice,setPrice] = useState<string>('');
@@ -38,7 +40,11 @@ function page() {
 
   const getProducts = async(startIndex:number) =>{
     try{
-    const response =await fetch(`http://localhost:3000/api/products?gender=male&startIndex=${startIndex}`);
+      const gender = searchParams.get('gender');
+      console.log(gender);
+      const url = `http://localhost:3000/api/products?gender=${gender}${selectedCategory.length> 0 ? `&category=${selectedCategory}`:''}${selectedPrice.length> 0 ? `&price=${selectedPrice}`:''}${selectedSize.length> 0 ? `&size=${selectedSize}`:''}&startIndex=${startIndex}`;
+      console.log(url);
+    const response =await fetch(url);
     const productsJson = await response.json();
     return productsJson.products;
     } catch(ex){
@@ -52,12 +58,11 @@ function page() {
      setProducts(products);
      setLoading(false);
     })()
-  },[]);
-
+  },[selectedCategory,selectedPrice,selectedSize]);
   const updateLoading = useCallback((value:boolean)=>{
     setLoading(value);
   },[])
-  const updateCategory = useCallback((id:string)=>{
+  const updateCategory = useCallback(async(id:string)=>{
     console.log(id);
     console.log(selectedCategory);
     if(id !== selectedCategory){

@@ -11,6 +11,10 @@ export type Price ={
     name:string;
     price:string;
 }
+export type Stock ={
+    product_id?:number;
+    size:number;
+}
 export interface Item{
     _id:string;
     description:string;
