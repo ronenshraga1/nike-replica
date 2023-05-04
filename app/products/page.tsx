@@ -83,8 +83,10 @@ function page() {
     }
   },[selectedSize])
   const handleNavigation = useCallback(async(e: any)=>{
+    console.log(y);
+    console.log(window.scrollY);
     if(window.scrollY !==y && window.scrollY+60 !==y  && y+160 !== window.scrollY){
-      const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
+      const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight-350;
       console.log(isloading);
       if(bottom && !isloading){
         updateLoading(true);
@@ -94,10 +96,12 @@ function page() {
       }
     }
     setY(window.scrollY);
-  },[y]);
+  },[y,isloading]);
   
   
   useEffect(() => {
+    console.log('run');
+
     window.addEventListener("scroll",handleNavigation);
   
     return () => { // return a cleanup function to unregister our function since it's going to run multiple times
