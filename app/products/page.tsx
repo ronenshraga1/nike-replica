@@ -38,10 +38,11 @@ function page() {
   const [y, setY] = useState(0);
   const [isloading,setLoading] = useState<boolean>(true);
 
-  const getProducts = async(startIndex:number) =>{
+  const getProducts = useCallback(async(startIndex:number) =>{
     try{
       const gender = searchParams.get('gender');
-      console.log(gender);
+      console.log(selectedCategory);
+      console.log(selectedPrice);
       const url = `http://localhost:3000/api/products?gender=${gender}${selectedCategory.length> 0 ? `&category=${selectedCategory}`:''}${selectedPrice.length> 0 ? `&price=${selectedPrice}`:''}${selectedSize.length> 0 ? `&size=${selectedSize}`:''}&startIndex=${startIndex}`;
       console.log(url);
     const response =await fetch(url);
@@ -50,10 +51,11 @@ function page() {
     } catch(ex){
       throw new Error('FAILED');
     }
-  }
+  },[selectedCategory,selectedPrice,selectedSize])
 
   useEffect(()=>{
     (async()=>{
+      window.scrollTo(0,0);
      const products : Item[] = await getProducts(0);
      setProducts(products);
      setLoading(false);
@@ -88,25 +90,23 @@ function page() {
     }
   },[selectedSize])
   const handleNavigation = useCallback(async(e: any)=>{
-    console.log(y);
-    console.log(window.scrollY);
     if(window.scrollY !==y && window.scrollY+60 !==y  && y+160 !== window.scrollY){
       const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight-350;
       console.log(isloading);
       if(bottom && !isloading){
         updateLoading(true);
         const newproducts : Item[] = await getProducts(products.length);
+        console.log(newproducts);
         updateLoading(false);
         setProducts([...products,...newproducts]);
       }
     }
     setY(window.scrollY);
-  },[y,isloading]);
+  },[y,isloading,getProducts,products]);
   
   
   useEffect(() => {
-    console.log('run');
-
+    console.log('run')
     window.addEventListener("scroll",handleNavigation);
   
     return () => { // return a cleanup function to unregister our function since it's going to run multiple times
