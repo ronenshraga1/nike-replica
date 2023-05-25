@@ -19,7 +19,7 @@ function LoadItems({products}:items){
   return(
     <>
             { products.map((item:Item,index)=>(
-          <Product id={item._id} key={item._id} url={item.mainImageUrl} productUrl='/' description={item.description} name={item.name} price={item.price} isNew={item.isNew} isMainPage={false}/>
+          <Product id={item._id} key={item._id} url={item.mainImageUrl} productUrl={`http://localhost:3000/products/${item._id}`}description={item.description} name={item.name} price={item.price} isNew={item.isNew} isMainPage={false}/>
         ))}
     </>
   )

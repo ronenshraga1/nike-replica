@@ -1,0 +1,18 @@
+.customButton{
+    justify-content: center;
+    -webkit-box-align: center;
+    place-items:center;
+    height: 36px;
+    width: 36px;
+    color: black;
+    background-color: rgb(255, 255, 255);
+    border-radius: 999px;
+}
+.buttonContainer{
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

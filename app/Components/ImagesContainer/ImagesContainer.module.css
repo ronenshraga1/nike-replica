@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    min-height: 455px;
+    max-height: 660px;
+}
+.loadedImages{
+    position: relative;
+    height: auto;
+    width: auto;
+    flex-grow: 1;
+}
+.bigImage{
+    z-index: -1;
+    opacity: 0;
+}
+.selected {
+    z-index: 1;
+    opacity: 1;
+}
