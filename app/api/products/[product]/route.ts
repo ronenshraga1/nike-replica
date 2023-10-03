@@ -7,7 +7,7 @@ type RouteParams = {
 }
 export async function GET(request: Request, context: { params : RouteParams }) {
     try{
-    connectMongo(); // {gender:0,name:0,category:0,price:0}
+    await connectMongo(); // {gender:0,name:0,category:0,price:0}
     const id = new mongoose.Types.ObjectId(context.params.product);
     const product:any = await Product.aggregate([{'$match':{_id:id}},
     {
@@ -16,12 +16,16 @@ export async function GET(request: Request, context: { params : RouteParams }) {
     {'$group': {
         '_id': "$stock.size",
         'name':{'$first':'$name'},
+        'price':{'$first':'$price'},
+        'description':{'$first':'$description'},
         'affiliated_images':{'$first':'$affiliated_images'},
         'mainImageUrl':{'$first':'$mainImageUrl'}
       },},  {'$project': { size:'$_id',
-      affiliated_images:'$affiliated_images',mainImageUrl:'$mainImageUrl' } },
+      affiliated_images:'$affiliated_images',mainImageUrl:'$mainImageUrl',name:'$name',price:'$price',description:'$description' } },
 ]);
-    return new Response(product);
+    console.log('ddddd');
+    console.log(product);
+    return NextResponse.json(product);
     } catch(ex){
         console.log(ex);
         return new Response('failed to load try again later',{status:500});
