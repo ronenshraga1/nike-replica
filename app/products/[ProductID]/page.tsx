@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './page.module.css';
 import ImagesContainer from '@/app/Components/ImagesContainer/ImagesContainer';
+import { Item } from '@/typings';
+import DetailSection from '@/app/Components/DetailSection/detailSection';
 // import ImagesContainer from '@/app/Components/ImagesContainer/ImagesContainer';
 type PageProps ={
     params:{
@@ -19,13 +21,15 @@ async function ProdutPage({params:{ProductID}}:PageProps) {
   //     })()
   //   },[]);
   const reponse = await fetch(`http://localhost:3000/api/products/${ProductID}`,{cache:"no-store"})
-  const jsonResponse =await reponse.json();
+  const allData =await reponse.json();
+  const product_details : Item = allData[0];
   console.log(ProductID);
-  console.log(jsonResponse[0]);
+  console.log(product_details);
   return (
     <div className={styles.pageContainer}>
         <div className={styles.imagesContainer}>
-          <ImagesContainer affiliated_images={jsonResponse[0].affiliated_images} />
+          <ImagesContainer affiliated_images={allData[0].affiliated_images} />
+          <DetailSection productDetails={product_details} size={allData} />
         </div>
         <div className={styles.productData}></div>
     </div>

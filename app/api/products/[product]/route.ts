@@ -19,9 +19,10 @@ export async function GET(request: Request, context: { params : RouteParams }) {
         'price':{'$first':'$price'},
         'description':{'$first':'$description'},
         'affiliated_images':{'$first':'$affiliated_images'},
+        'category':{'$first':'$category'},
         'mainImageUrl':{'$first':'$mainImageUrl'}
       },},  {'$project': { size:'$_id',
-      affiliated_images:'$affiliated_images',mainImageUrl:'$mainImageUrl',name:'$name',price:'$price',description:'$description' } },
+      affiliated_images:'$affiliated_images',mainImageUrl:'$mainImageUrl',name:'$name',price:'$price',description:'$description',category:"$category" } },
 ]);
     console.log('ddddd');
     console.log(product);

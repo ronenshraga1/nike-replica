@@ -9,9 +9,6 @@ type PageProps ={
 } 
 function ImagesContainer({affiliated_images}:PageProps) {
   const [selected,setSelected] = useState<number>(0);
-  console.log('cccc');
-  console.log(affiliated_images);
-
   const changeImage = useCallback((imageIndex:number)=>{
     if(imageIndex<affiliated_images.length && imageIndex>=0){
         setSelected(imageIndex)
@@ -23,15 +20,16 @@ function ImagesContainer({affiliated_images}:PageProps) {
     <div className={styles.container}>
                 <div className={styles.browseImages}>
             {affiliated_images.map((image,index)=>(
-                <Image key={index} height={60} width={60} src={image} alt='' />
+                <Image key={index+'dsadadgdag'} height={60} width={60} src={image} alt='' />
             ))}
         </div>
 
         <div className={styles.loadedImages}>
             {affiliated_images.map((image,index)=>(
                 <><Image key={index} className={`${styles['bigImage']} ${selected === index ? styles['selected'] : undefined}`} fill src={image} alt='' />
-                <SwitchImage changeImage={changeImage} selected={selected} imagesNumber={affiliated_images.length-1} /></>
+                </>
             ))}
+            <SwitchImage changeImage={changeImage} selected={selected} imagesNumber={affiliated_images.length-1} />
         </div>
     </div>
   )

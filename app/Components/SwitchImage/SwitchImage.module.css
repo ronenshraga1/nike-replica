@@ -1,12 +1,18 @@
 .customButton{
     justify-content: center;
+    position: relative;
     -webkit-box-align: center;
     place-items:center;
     height: 36px;
     width: 36px;
     color: black;
+    cursor: pointer;
     background-color: rgb(255, 255, 255);
     border-radius: 999px;
+}
+.customButton:hover{
+    transition: .5s;
+    opacity: 0.5;
 }
 .buttonContainer{
     position: absolute;

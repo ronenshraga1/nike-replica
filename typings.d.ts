@@ -19,6 +19,8 @@ export interface Item{
     _id:string;
     description:string;
     name:string;
+    category?:string;
+    affiliated_images?:Array;
     mainImageUrl:string;
     price:number;
     createDate:Date;

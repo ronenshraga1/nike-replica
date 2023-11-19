@@ -1,11 +1,18 @@
+import { Item } from '@/typings'
 import React from 'react'
 type PageProps ={
-    
+    productDetails:Item;
+    size:Array<any>;
 }
-function detailSection() {
+function DetailSection({productDetails,size}:PageProps) {
   return (
-    <div>detailSection</div>
+    <div>
+      <h2>{productDetails.name}</h2>
+      <h5>{productDetails.category}</h5>
+      <br></br>
+      <h5>{productDetails.price}</h5>
+    </div>
   )
 }
 
-export default detailSection
+export default DetailSection;
